@@ -25,3 +25,5 @@ def is_palindrome(head):
         second_half = second_half.next
     reverse_linked_list(cur)
     return True
+
+# 利用栈存储实现
