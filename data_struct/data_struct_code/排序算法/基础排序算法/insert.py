@@ -6,13 +6,6 @@
         将列表分为两个区域, 左边是排序好的区域, 每轮从右边区域第一个数往左边区域插入
 """
 
-def insert_sort(array):
-    length = len(array)
-    for i in range(1, length):
-        for j in range(i, 0, -1):
-            if array[j] < array[j - 1]:
-                array[j], array[j - 1] = array[j - 1], array[j]
-    return array
 
 
 from utils import get_random_list
