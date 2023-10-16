@@ -9,7 +9,7 @@ class BinaryHeap:
         self._capacity = capacity
 
     def heapify(self):
-        "堆化,从上往下"
+        "堆化,从下往上"
         self._heapify(self._data, len(self._data)-1)
 
     def _heapify(self, data, tail_idx):
