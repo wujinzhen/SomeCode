@@ -9,6 +9,9 @@ class Heap:
         self._capacity = capacity
         self._heapify()
 
+    def get_count(self):
+        return len(self._data)
+
     def _heapify(self):
         """堆化"""
         tail_idx = len(self._data) - 1
@@ -41,15 +44,18 @@ class Heap:
         if len(self._data) == 1:
             return self._data.pop()
         tmp = self._data[0]
-        self._data[0] = self._data.pop(len(self._data)-1)
-        self._heap_down(0, len(self._data)-2)
+        self._data[0] = self._data.pop()
+        self._heap_down(0, len(self._data)-1)
         return tmp
+
+    def get_top(self):
+        return self._data[0]
 
 
 class MaxHeap(Heap):
     def _heap_down(self, idx, tail_idx):
         mid = (tail_idx-1) // 2
-        while idx < mid:
+        while idx <= mid:
             left = idx * 2 + 1
             right = idx * 2 + 2
             if right <= tail_idx:
@@ -69,7 +75,7 @@ class MaxHeap(Heap):
         self._data.append(num)
         tail_idx = len(self._data) - 1
         while tail_idx > 0:
-            parent = tail_idx // 2
+            parent = (tail_idx-1) // 2
             if self._data[parent] < self._data[tail_idx]:
                 self._data[parent], self._data[tail_idx]= self._data[tail_idx], self._data[parent]
                 tail_idx = parent
@@ -81,7 +87,7 @@ class MaxHeap(Heap):
 class MinHeap(Heap):
     def _heap_down(self, idx, tail_idx):
         mid = (tail_idx-1) // 2
-        while idx < mid:
+        while idx <= mid:
             left = idx * 2 + 1
             right = idx * 2 + 2
             if right <= tail_idx:
@@ -100,8 +106,8 @@ class MinHeap(Heap):
     def _insert(self, num):
         self._data.append(num)
         tail_idx = len(self._data) - 1
-        while tail_idx < 0:
-            parent = tail_idx // 2
+        while tail_idx > 0:
+            parent = (tail_idx-1) // 2
             if self._data[parent] > self._data[tail_idx]:
                 self._data[parent], self._data[tail_idx]= self._data[tail_idx], self._data[parent]
                 tail_idx = parent
@@ -110,8 +116,8 @@ class MinHeap(Heap):
 
 
 if __name__ == '__main__':
-    _list = [9, 8, 4, 5, 3, 1, 99, 44, 22]
-    bh = MaxHeap(_list)
+    _list = [9, 8, 5, 3, 1, 99, 44, 22]
+    bh = MinHeap(_list)
     print(bh._data)
     bh.insert(100)
     print(bh._data)
